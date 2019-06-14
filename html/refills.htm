@@ -1,0 +1,114 @@
+<html>
+               
+<head>       
+  <title>PoolCop Refills Page</title>
+     
+  <script src="prototype161.js" type="text/javascript" charset="utf-8"></script> 
+  <script src="syncor.js" type="text/javascript" charset="utf-8"></script> 
+
+  <script language="javascript">  
+  
+    //==============================================================================
+    // Executable code that runs when the page that includes this file loads.
+    //==============================================================================
+
+    if (typeof syn =='undefined') 
+    {
+	  throw("shell requires the syn Libary from syncor.js");
+    }
+ 
+    var reqObject = 
+    {
+	  Version 				: '1.0.0',
+	  // Constants for Making Ajax Requests
+    }
+
+    // This code will just run since it isn't inside an object of any sort
+    // and it was included in index.htm inside a Script element. 
+    // In effect it runs down to the addEvent call. The rest of the code is then
+    // invoked from either NB function callbacks, posts, the timer expiring or AJAX calls.
+    var shell = new Object();
+    shell._refillData = {};
+
+    syn.AddEvent(window, 'load', doLoad);
+
+    //==============================================================================
+    // When the form loads set up all the GUI elements to reflect the current
+    // state of the NetBurner, then start the Clock that triggers the  AJAX
+    // callbacks
+    //==============================================================================
+    function doLoad()
+    {
+      shell.StartClock();
+    }
+
+    //==============================================================================
+    // When the timer expires it ends up calling this function.
+    //==============================================================================
+    shell.CallbackNetburner = function()
+    {
+	  var request = syn.MakeUrlParmList("request", "refillData" );
+	  syn.MakeAjaxRequest(request,shell.CreateRefillData);
+    }
+
+    //==============================================================================
+    // When Ajax response is receive this function will be called.
+    //==============================================================================
+    shell.CreateRefillData = function(resultData)
+    {
+	  _refillData = syn.EvalJsonObject(resultData);
+	  if (this._refillData != null)
+	  { 
+	  /*      
+        syn.AddTextToCleanNodeViaId(_refillData.Time,        "Time");
+	    syn.AddTextToCleanNodeViaId(_refillData.Date,        "Date");
+	    syn.AddTextToCleanNodeViaId(_refillData.FilterPos,   "FilterPos");
+        syn.AddTextToCleanNodeViaId(_refillData.PumpState,   "PumpState");
+	    syn.AddTextToCleanNodeViaId(_refillData.Pressure,    "Pressure");
+  	    syn.AddTextToCleanNodeViaId(_refillData.WaterTemp,   "WaterTemp");
+	    syn.AddTextToCleanNodeViaId(_refillData.pH,          "pH");
+	    syn.AddTextToCleanNodeViaId(_refillData.Orp,         "ORP");
+	    syn.AddTextToCleanNodeViaId(_refillData.BattVolts,   "BattVolts");
+      */
+      }
+    }
+
+    //==============================================================================
+    // Set up a timer for the callback to the NetBurner
+    //==============================================================================
+    shell.timerTicks_ = 3;
+    shell.StartClock = function()
+    {
+	  --shell.timerTicks_;
+	  setTimeout("shell.StartClock()",333); // delay is in milliseconds
+	  if(shell.timerTicks_==0)
+  	  {
+	    shell.timerTicks_ = 3;
+	    shell.CallbackNetburner();
+	  }
+    }
+
+    //******************************************************************************
+    // End AJAX Code
+    //****************************************************************************** 
+  </script>  
+  <link rel=stylesheet type="text/css" href=styles.css> 
+</head> 
+
+<body >
+
+<!-- we want to let the user see an error message if they don't support scripting. -->
+<!-- div id="MainPage" -->
+ 
+<div id ='objectSample'>  
+<table class='divBox' border='0' width ='550'>
+  <tr><td>&nbsp;&nbsp;Mode</td>   <td>AUTO</td> <td>:</td> <td>ON/OFF</td>          <td><button type="button" onclick="ToggleRefillMode()">Toggle</button></td> </tr>
+  <tr><td>&nbsp;&nbsp;Level</td>  <td/>         <td>:</td> <td>Low/Normal/High</td> <td><button type="button" onclick="RefillPool()"      >Refill</button></td> </tr>
+  <tr><td>&nbsp;&nbsp;Valve</td>  <td/>         <td>:</td> <td>Open/Closed</td>     <td/> </tr> 
+</table>
+</div>
+
+</body>
+</html>
+
+

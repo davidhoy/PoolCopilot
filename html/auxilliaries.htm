@@ -1,0 +1,114 @@
+<html>
+               
+<head>       
+  <title>PoolCop Status Page</title>
+     
+  <script src="prototype161.js" type="text/javascript" charset="utf-8"></script> 
+  <script src="syncor.js" type="text/javascript" charset="utf-8"></script> 
+
+  <script language="javascript">  
+    //==============================================================================
+    // Executable code that runs when the page that includes this file loads.
+    //==============================================================================
+
+    if (typeof syn =='undefined') 
+    {
+	   throw("shell requires the syn Libary from syncor.js");
+    }
+    
+    var reqObject =
+    {
+	  Version 				: '1.0.0',
+    }
+
+    //This code will just run since it isn't inside an object of any sort
+    //and it was included in index.htm inside a Script element. 
+    //In effect it runs down to the addEvent call. The rest of the code is then
+    //invoked from either NB function callbacks, posts, the timer expiring or AJAX calls.
+    var shell = new Object();
+    shell._auxData = {};
+    
+    syn.AddEvent(window, 'load', doLoad);
+
+    //==============================================================================
+    // When the form loads set up all the GUI elements to reflect the current
+    // state of the NetBurner, then start the Clock that triggers the  AJAX
+    // callbacks
+    //==============================================================================
+    function doLoad()
+    {
+      shell.StartClock();
+    }
+   
+   
+    //==============================================================================
+    // When the timer expires it ends up calling this function.
+    //==============================================================================
+    shell.CallbackNetburner = function()
+    {
+	  var request = syn.MakeUrlParmList("request", "auxData");
+	  syn.MakeAjaxRequest(request,shell.CreateAuxData);
+    }
+
+    shell.CreateAuxData = function(resultData)
+    {
+	  _auxData = syn.EvalJsonObject(resultData);
+	  if (this._auxData != null)
+	  {       
+        syn.AddTextToCleanNodeViaId(_auxData.Aux1Name,    "Aux1Name"  );
+        syn.AddTextToCleanNodeViaId(_auxData.Aux1State,   "Aux1State" );
+        syn.AddTextToCleanNodeViaId(_auxData.Aux2Name,    "Aux2Name"  );
+        syn.AddTextToCleanNodeViaId(_auxData.Aux2State,   "Aux2State" );
+        syn.AddTextToCleanNodeViaId(_auxData.Aux3Name,    "Aux3Name"  );
+        syn.AddTextToCleanNodeViaId(_auxData.Aux3State,   "Aux3State" );
+        syn.AddTextToCleanNodeViaId(_auxData.Aux4Name,    "Aux4Name"  );
+        syn.AddTextToCleanNodeViaId(_auxData.Aux4State,   "Aux4State" );
+        syn.AddTextToCleanNodeViaId(_auxData.Aux5Name,    "Aux5Name"  );
+        syn.AddTextToCleanNodeViaId(_auxData.Aux5State,   "Aux5State" );
+        syn.AddTextToCleanNodeViaId(_auxData.Aux6Name,    "Aux6Name"  );
+        syn.AddTextToCleanNodeViaId(_auxData.Aux6State,   "Aux6State" );
+        syn.AddTextToCleanNodeViaId(_auxData.Aux7Name,    "Aux7Name"  );
+        syn.AddTextToCleanNodeViaId(_auxData.Aux7State,   "Aux7State" );
+      }
+    }
+
+    //==============================================================================
+    // Set up a timer for the callback to the NetBurner
+    //==============================================================================
+    shell.timerTicks_ = 3;
+    shell.StartClock = function()
+    {
+	  --shell.timerTicks_;
+	  setTimeout("shell.StartClock()",333); // delay is in milliseconds
+	  if(shell.timerTicks_==0)
+  	  {
+	    shell.timerTicks_ = 3;
+	    shell.CallbackNetburner();
+	  }
+    }
+
+    //******************************************************************************
+    // End AJAX Code
+    //******************************************************************************
+  </script>  
+  
+  <link rel=stylesheet type="text/css" href=styles.css> 
+</head> 
+
+<body >
+
+<!-- we want to let the user see an error message if they don't support scripting. -->
+<!-- div id="MainPage" -->
+ 
+<div id ='objectSample'>  
+<table class='divBox' border='0' width ='550'>
+  <tr><th>Aux 1</th> <td id='Aux1Name'/> <td>:</td> <td id='Aux1State'></td> <td><button type="button" onclick="ToggleAux1()">Toggle</button></td> </tr>
+  <tr><th>Aux 2</th> <td id='Aux2Name'/> <td>:</td> <td id='Aux2State'></td> <td><button type="button" onclick="ToggleAux2()">Toggle</button></td> </tr>
+  <tr><th>Aux 3</th> <td id='Aux3Name'/> <td>:</td> <td id='Aux3State'></td> <td><button type="button" onclick="ToggleAux3()">Toggle</button></td> </tr>
+  <tr><th>Aux 4</th> <td id='Aux4Name'/> <td>:</td> <td id='Aux4State'></td> <td><button type="button" onclick="ToggleAux4()">Toggle</button></td> </tr>
+  <tr><th>Aux 5</th> <td id='Aux5Name'/> <td>:</td> <td id='Aux5State'></td> <td><button type="button" onclick="ToggleAux5()">Toggle</button></td> </tr>
+  <tr><th>Aux 6</th> <td id='Aux6Name'/> <td>:</td> <td id='Aux6State'></td> <td><button type="button" onclick="ToggleAux6()">Toggle</button></td> </tr> 
+</table>
+
+</body>
+</html>

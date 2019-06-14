@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PoolCopilot", "PoolCopilot.vcproj", "{EE849242-340A-4412-97F4-62C99BAFABC3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B49D9A6D-0D97-48F5-A1FA-130994290A41}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EE849242-340A-4412-97F4-62C99BAFABC3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EE849242-340A-4412-97F4-62C99BAFABC3}.Debug|Win32.Build.0 = Debug|Win32
+		{EE849242-340A-4412-97F4-62C99BAFABC3}.Release|Win32.ActiveCfg = Release|Win32
+		{EE849242-340A-4412-97F4-62C99BAFABC3}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,1 @@
+..\MakeVersion\Release\makeversion.exe -inc .\version.ver

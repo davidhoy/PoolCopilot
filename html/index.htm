@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml2/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+  <title>PCFR - PoolCopilot Main Page</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" type="text/css" href="ajaxtabs/ajaxtabs.css" />
+  <script type="text/javascript" src="ajaxtabs/ajaxtabs.js"></script>  
+  <link rel="stylesheet" type="text/css" href="styles.css" />
+  
+</head>
+
+<body>
+
+<img src="poolcopilot.png" border= "0">
+<h1 class=TitleRight><!--FUNCTIONCALL WriteStartupBanner --></h1>
+
+<noscript> 
+    <H1>This page requires JavaScript to be enabled to run properly.</H1>
+</noscript>
+
+<div id="poolcoptabscontainer" style="border:1px solid gray; width:640px; height: 400px; background-color: lightyellow; padding: 5px">
+</div>
+<div id="poolcoptabs" class="modernbricksmenu2">
+<ul>
+  <li><a href="status.htm"       rel="#iframe" class="selected">Status</a></li>
+  <li><a href="history.htm"      rel="#iframe">History</a></li>
+  <li><a href="refills.htm"      rel="#iframe">Refills</a></li>
+  <li><a href="auxilliaries.htm" rel="#iframe">Auxilliaries</a></li>
+  <li><a href="phcontrol.htm"    rel="#iframe">pH</a></li>
+  <li><a href="orpcontrol.htm"   rel="#iframe">ORP</a></li>
+  <li><a href="ionisation.htm"   rel="#iframe">Ionisation</a></li>
+  <li><a href="autochlor.htm"    rel="#iframe">AutoChlor</a></li>
+</ul>
+</div>
+<br style="clear: left" />
+
+<script type="text/javascript">
+  var mypoolcop = new ddajaxtabs("poolcoptabs", "poolcoptabscontainer")
+  mypoolcop.setpersist(true)
+  mypoolcop.setselectedClassTarget("link") //"link" or "linkparent"
+  mypoolcop.init()
+</script>
+
+</body>
+</html>

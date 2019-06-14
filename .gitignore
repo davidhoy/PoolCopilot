@@ -1,0 +1,18 @@
+# Lines starting with '#' are considered comments.
+
+# Ignore all build-generated files
+Debug/*
+DebugSB72/*
+DebugSB700EX/*
+Release/*
+ReleaseSB72/*
+ReleaseSB700EX/*
+
+
+# Ignore Visual Studio temp files
+*.ncb
+*.suo
+
+# Ignore Eclipse files
+.metadata/*
+.settings/*

@@ -1,0 +1,116 @@
+<html>
+               
+<head>       
+  <title>PoolCop Status Page</title>
+     
+  <script src="prototype161.js" type="text/javascript" charset="utf-8"></script> 
+  <script src="syncor.js" type="text/javascript" charset="utf-8"></script> 
+
+  <script language="javascript">  
+  
+    //==============================================================================
+    // Executable code that runs when the page that includes this file loads.
+    //==============================================================================
+
+    if (typeof syn =='undefined') 
+    {
+	  throw("shell requires the syn Libary from syncor.js");
+    }
+ 
+    var reqObject = 
+    {
+	  Version 				: '1.0.0',
+	  // Constants for Making Ajax Requests
+    }
+
+    // This code will just run since it isn't inside an object of any sort
+    // and it was included in index.htm inside a Script element. 
+    // In effect it runs down to the addEvent call. The rest of the code is then
+    // invoked from either NB function callbacks, posts, the timer expiring or AJAX calls.
+    var shell = new Object();
+    shell._poolData = {};
+
+    syn.AddEvent(window, 'load', doLoad);
+
+    //==============================================================================
+    // When the form loads set up all the GUI elements to reflect the current
+    // state of the NetBurner, then start the Clock that triggers the  AJAX
+    // callbacks
+    //==============================================================================
+    function doLoad()
+    {
+      shell.StartClock();
+    }
+
+    //==============================================================================
+    // When the timer expires it ends up calling this function.
+    //==============================================================================
+    shell.CallbackNetburner = function()
+    {
+	  var request = syn.MakeUrlParmList("request", "poolData" );
+	  syn.MakeAjaxRequest(request,shell.CreatePoolData);
+    }
+
+    //==============================================================================
+    // When Ajax response is receive this function will be called.
+    //==============================================================================
+    shell.CreatePoolData = function(resultData)
+    {
+	  _poolData = syn.EvalJsonObject(resultData);
+	  if (this._poolData != null)
+	  {       
+        syn.AddTextToCleanNodeViaId(_poolData.Time,        "Time");
+	    syn.AddTextToCleanNodeViaId(_poolData.Date,        "Date");
+	    syn.AddTextToCleanNodeViaId(_poolData.FilterPos,   "FilterPos");
+        syn.AddTextToCleanNodeViaId(_poolData.PumpState,   "PumpState");
+	    syn.AddTextToCleanNodeViaId(_poolData.Pressure,    "Pressure");
+  	    syn.AddTextToCleanNodeViaId(_poolData.WaterTemp,   "WaterTemp");
+	    syn.AddTextToCleanNodeViaId(_poolData.pH,          "pH");
+	    syn.AddTextToCleanNodeViaId(_poolData.Orp,         "ORP");
+	    syn.AddTextToCleanNodeViaId(_poolData.BattVolts,   "BattVolts");
+	    syn.HideMe("ajaxTest")
+      }
+    }
+
+    //==============================================================================
+    // Set up a timer for the callback to the NetBurner
+    //==============================================================================
+    shell.timerTicks_ = 3;
+    shell.StartClock = function()
+    {
+	  --shell.timerTicks_;
+	  setTimeout("shell.StartClock()",333); // delay is in milliseconds
+	  if(shell.timerTicks_==0)
+  	  {
+	    shell.timerTicks_ = 3;
+	    shell.CallbackNetburner();
+	  }
+    }
+
+    //******************************************************************************
+    // End AJAX Code
+    //****************************************************************************** 
+  </script>  
+  <link rel=stylesheet type="text/css" href=styles.css> 
+</head> 
+
+<body >
+
+<!-- we want to let the user see an error message if they don't support scripting. -->
+<!-- div id="MainPage" -->
+ 
+<div id ='objectSample'>  
+<table class='divBox' border='0' width ='550'>
+  <tr><th>Date</th>       <td/>                    <td>:</td> <td id='Date'><td/>      <td/> </tr>
+  <tr><th>Time</th>       <td/>                    <td>:</td> <td id='Time'></td>      <td/> </tr>
+  <tr><th>Position</th>   <td/>                    <td>:</td> <td id='FilterPos'></td> <td/> </tr>
+  <tr><th>Pump</th>       <td id="PumpState"></td> <td>:</td> <td id='Pressure'></td>  <td><button type="button" onclick="PumpOn()">&nbsp;On&nbsp;</button><button type="button" onclick="PumpOff()">&nbsp;Off&nbsp;</button></td> </tr>
+  <tr><th>Water Temp</th> <td/>                    <td>:</td> <td id='WaterTemp'></td> <td/> </tr> 
+  <tr><th>pH</th>         <td/>                    <td>:</td> <td id='pH'></td>        <td><button type="button" onclick="MeasurePh()" >Measure</button></td> </tr> 
+  <tr><th>ORP</th>        <td/>                    <td>:</td> <td id='Orp'></td>       <td><button type="button" onclick="MeasureOrp()">Measure</button></td> </tr>
+  <tr><th>Batt Volts</th> <td/>                    <td>:</td> <td id='BattVolts'></td> <td/> </tr>
+</table>
+</div> 
+
+</body>
+</html>

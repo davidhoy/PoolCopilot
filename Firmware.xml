@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PoolCopilotFirmware>
+    <Builds>
+        <Build VersionNumber="latest"
+               FileName="PoolCopilot_APP.s19"
+               SHA1=""
+               Size="0"
+               DateUploaded=""
+               Description="" />
+
+        <Build VersionNumber="stable"
+               FileName="PoolCopilot_APP_v0_1_1047.s19"
+               SHA1="DBC44C58CB40B92811B1E6E5A07D0B304B1C8545"
+               Size="0"
+               DateUploaded="2012/03/11 17:13:00"
+               Description="" />
+
+        <Build VersionNumber="0.1.1047"
+               FileName="PoolCopilot_APP_v0_1_1047.s19"
+               SHA1="DBC44C58CB40B92811B1E6E5A07D0B304B1C8545"
+               Size="0"
+               DateUploaded="2012/03/11 17:13:00"
+               Description="" />
+        
+        <Build VersionNumber="0.1.1016"
+               FileName="PoolCopilot_APP_v0_1_1016.s19"
+               SHA1="6F0CCB2DB81C48C23C600C40FEE2F93B77492FAE"
+               Size="1175330"
+               DateUploaded="2011/12/03 09:36:00"
+               Description="Added support for persistent config store. Fixed bug in watchdog reset type detection. Added Poco library to parse URLs. Fixed bug in parsing of SetPumpConfig XML command. Added support for setpoint to RSL command.  Disabled watchdog by default - can be turned on by config." />
+
+        <Build VersionNumber="0.1.1011"
+               FileName="PoolCopilot_APP_v0_1_1011.s19"
+               SHA1="587EF2E9BA28CF16A5BFAA5602AFF807158169E7"
+               Size="1175330"
+               DateUploaded="2011/12/03 09:36:00"
+               Description="Added support for hardware watchdog timer." />
+
+        <Build VersionNumber="0.1.1006"
+               FileName="PoolCopilot_APP_v0_1_1006.s19"
+               SHA1="AB755B783F316CCED68B08533464EA25C1B335C3"
+               Size="1171978"
+               DateUploaded="2011/12/01 08:53:00"
+               Description="Added support for firmware update via FTP." />
+    </Builds>
+</PoolCopilotFirmware>

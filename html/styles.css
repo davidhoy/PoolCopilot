@@ -1,0 +1,78 @@
+
+#ajaxTest
+{
+	border: 1px solid #333333;
+	background-color: #EEE;
+	padding: 2px;
+	margin: 0px;
+	text-align: justify;
+	width: 600px;
+}
+
+#MainPage 
+{
+	position:relative; top:-70px;
+}
+
+
+IMG 
+{
+		position:relative; top:0; left:0;		
+}
+	
+.TitleRight 
+{
+		position:relative; top:-70px; left:160px;
+		color: #a33;
+}
+
+.TableHeader
+{
+  	font-weight:bold;	
+}
+
+.divBox
+{
+	//border:1px solid #990050;
+	//background-color: #BFE2F9;
+	padding: 2px;
+	margin-bottom: 2px;
+	margin-top:20px;
+	width: 525px;
+}
+
+table 
+{
+ 	border-width: 0px;
+ 	border-spacing: 1px;
+ 	border-style: outset;
+ 	border-color: gray;
+ 	border-collapse: separate;
+ 	//background-color: #BFE2F9;
+    font-family:"Calibri","sans-serif";
+}
+
+table th 
+{
+ 	border-width: 0px;
+ 	padding: 1px;
+ 	border-style: inset;
+ 	border-color: gray;
+ 	//background-color: #BFE2F9;
+    color: black;
+    //align: left;
+    font-weight: bold;
+ 	-moz-border-radius: ;
+}
+
+table td 
+{
+ 	border-width: 0px;
+ 	padding: 1px;
+ 	border-style: inset;
+ 	border-color: blue;
+    color: black;
+ 	//background-color: #BFE2F9;
+ 	-moz-border-radius: ;
+}
+

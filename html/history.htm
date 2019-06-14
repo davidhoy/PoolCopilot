@@ -1,0 +1,114 @@
+<html>
+               
+<head>       
+  <title>PoolCop History Page</title>
+     
+  <script src="prototype161.js" type="text/javascript" charset="utf-8"></script> 
+  <script src="syncor.js" type="text/javascript" charset="utf-8"></script> 
+
+  <script language="javascript">  
+  
+    //==============================================================================
+    // Executable code that runs when the page that includes this file loads.
+    //==============================================================================
+
+    if (typeof syn =='undefined') 
+    {
+	  throw("shell requires the syn Libary from syncor.js");
+    }
+ 
+    var reqObject = 
+    {
+	  Version 				: '1.0.0',
+	  // Constants for Making Ajax Requests
+    }
+
+    // This code will just run since it isn't inside an object of any sort
+    // and it was included in index.htm inside a Script element. 
+    // In effect it runs down to the addEvent call. The rest of the code is then
+    // invoked from either NB function callbacks, posts, the timer expiring or AJAX calls.
+    var shell = new Object();
+    shell._historyData = {};
+
+    syn.AddEvent(window, 'load', doLoad);
+
+    //==============================================================================
+    // When the form loads set up all the GUI elements to reflect the current
+    // state of the NetBurner, then start the Clock that triggers the  AJAX
+    // callbacks
+    //==============================================================================
+    function doLoad()
+    {
+      shell.StartClock();
+    }
+
+    //==============================================================================
+    // When the timer expires it ends up calling this function.
+    //==============================================================================
+    shell.CallbackNetburner = function()
+    {
+	  var request = syn.MakeUrlParmList("request", "historyData" );
+	  syn.MakeAjaxRequest(request,shell.CreateHistoryData);
+    }
+
+    //==============================================================================
+    // When Ajax response is receive this function will be called.
+    //==============================================================================
+    shell.CreateHistoryData = function(resultData)
+    {
+	  _historyData = syn.EvalJsonObject(resultData);
+	  if (this._historyData != null)
+	  { 
+	  /*      
+        syn.AddTextToCleanNodeViaId(_historyData.Time,        "Time");
+	    syn.AddTextToCleanNodeViaId(_historyData.Date,        "Date");
+	    syn.AddTextToCleanNodeViaId(_historyData.FilterPos,   "FilterPos");
+        syn.AddTextToCleanNodeViaId(_historyData.PumpState,   "PumpState");
+	    syn.AddTextToCleanNodeViaId(_historyData.Pressure,    "Pressure");
+  	    syn.AddTextToCleanNodeViaId(_historyData.WaterTemp,   "WaterTemp");
+	    syn.AddTextToCleanNodeViaId(_historyData.pH,          "pH");
+	    syn.AddTextToCleanNodeViaId(_historyData.Orp,         "ORP");
+	    syn.AddTextToCleanNodeViaId(_historyData.BattVolts,   "BattVolts");
+      */
+      }
+    }
+
+    //==============================================================================
+    // Set up a timer for the callback to the NetBurner
+    //==============================================================================
+    shell.timerTicks_ = 3;
+    shell.StartClock = function()
+    {
+	  --shell.timerTicks_;
+	  setTimeout("shell.StartClock()",333); // delay is in milliseconds
+	  if(shell.timerTicks_==0)
+  	  {
+	    shell.timerTicks_ = 3;
+	    shell.CallbackNetburner();
+	  }
+    }
+
+    //******************************************************************************
+    // End AJAX Code
+    //****************************************************************************** 
+  </script>  
+  <link rel=stylesheet type="text/css" href=styles.css> 
+</head> 
+
+<body >
+
+<!-- we want to let the user see an error message if they don't support scripting. -->
+<!-- div id="MainPage" -->
+ 
+<div id ='objectSample'>  
+<table class='divBox' border='0' width ='550'>
+  <tr><th>Cleaning Cycles</th> <td>Last</td>  <td>:</td> <td color='red'>dd/mm hh:mm</td>  <td/> </tr>
+  <tr><td/>                    <td>Total</td> <td>:</td> <td color='red'>000</td>          <td/> </tr>
+  <tr><th>Pool Refills</th>    <td>Last</td>  <td>:</td> <td color='red'>dd/mm hh:mm</td>  <td/> </tr> 
+  <tr><td/>                    <td>Total</td> <td>:</td> <td color='red'>000</td>          <td/> </tr> 
+</table>
+</div>
+
+</body>
+</html>
+
